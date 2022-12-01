@@ -71,6 +71,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-词法作用域vs动态作用域" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
+  <time class="dt-published" datetime="2022-12-01T02:48:38.126Z" itemprop="datePublished">2022-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/">词法作用域vs动态作用域</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="词法作用域和动态作用域有什么不同？"><a href="#词法作用域和动态作用域有什么不同？" class="headerlink" title="词法作用域和动态作用域有什么不同？"></a>词法作用域和动态作用域有什么不同？</h1><p>作用域分为 <strong>静态作用域</strong> 和 __动态作用域__，动态作用域在函数调用时才决定，而静态作用域在编译时期（词法解析阶段）就确定好了，所以也叫词法作用域。</p>
+<pre><code>function fun() &#123;
+    console.log(a)
+&#125;
+
+function bar() &#123;
+    var a=3
+    fun()
+&#125;
+
+var a=1
+
+bar()  // 1
+</code></pre>
+<p>在解释这个例子之前，还得讲解另一个知识点。</p>
+<h2 id="LHS和RHS"><a href="#LHS和RHS" class="headerlink" title="LHS和RHS"></a>LHS和RHS</h2><p>LSH(left-hand side)找到变量所在的容器本身，并且将对该变量进行赋值。</p>
+<p>RHS(right-hand side)查找某个变量的值</p>
+<p>LSH和RSH查找过程通过作用域链进行寻找。作用域链在函数定义的时候创建好。</p>
+<p>现在说回这个例子，在fun函数要执行console.log(a)，就是要找到变量a的值，但是fun函数没有变量a，所以要通过RSH查询（当前作用域&#x3D;&gt;上一级作用域&#x3D;&gt; … &#x3D;&gt; 全局作用域）找到变量a，在全局作用域里找到变量a，于是就输出1。</p>
+<p>下面我们来看看动态作用域的例子（bash采用的是动态作用域)</p>
+<pre><code>#!/bin/bash
+num=1
+function fun1()&#123;
+    echo $num
+&#125;
+
+function fun2()&#123;
+    local num=2
+    fun1   // 2
+&#125;
+fun2
+</code></pre>
+<p>动态作用域会从检查函数调用链，查找目标变量出来，所以就可以对上面的例子继续解释，在fun1函数找不到num变量，就会从调用栈中找到上一级调用fun1的函数fun2，并且在函数fun2找到变量num，所以就会输出2。</p>
+<pre><code>function foo() &#123;
+    console.log(a);
+&#125;
+
+function bar() &#123;
+    var a = 3;
+    foo();
+&#125;
+
+var a = 2;
+bar(); // 2;
+</code></pre>
+<p>这个js程序使用的是词法作用域。如果它使用动态作用域，将会输出什么？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/" data-id="clb4hfi7b0000wst45lul0739" data-title="词法作用域vs动态作用域" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-closure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/12/01/closure/" class="article-date">
@@ -80,6 +164,16 @@
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/12/01/closure/">What is Closure?</a>
+    </h1>
+  
+
+      </header>
     
     <div class="e-content article-entry" itemprop="articleBody">
       
@@ -111,7 +205,7 @@ console.log(wrap1());
 console.log(wrap2());
 // → 2
 </code></pre>
-<p>这个例子来自于《JavaScript》编程精解，其中给wrap1赋值为一个包含 1 的一个函数<br>此时我们使用求值结果运算符来访问这个函数，函数返回了1，所以我们看到了1</p>
+<p>这个例子来自于《JavaScript编程精解》，其中给wrap1赋值为一个包含 1 的一个函数<br>此时我们使用求值结果运算符来访问这个函数，函数返回了1，所以我们看到了1</p>
 <p>wrap2 同理</p>
 <pre><code>function multiplier(factor) &#123;
 return number =&gt; number * factor;
@@ -179,7 +273,7 @@ f() //这两个f(n)的结果分别是什么？？
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/closure/" data-id="clb3y3vex0000qkt4712qcsmf" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/01/closure/" data-id="clb3y3vex0000qkt4712qcsmf" data-title="What is Closure?" class="article-share-link">Share</a>
       
       
       
@@ -323,7 +417,11 @@ f() //这两个f(n)的结果分别是什么？？
       <ul>
         
           <li>
-            <a href="/2022/12/01/closure/">(no title)</a>
+            <a href="/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/">词法作用域vs动态作用域</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/01/closure/">What is Closure?</a>
           </li>
         
           <li>
