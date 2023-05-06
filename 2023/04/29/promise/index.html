@@ -6,13 +6,20 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+  <meta name="description" content="目录-异步编程-回调函数-回调地狱-promise 异步编程js语言是单线程机制。所谓单线程就是按次序执行，执行完一个任务再执行下一个。但是不影响存在同步和异步的两种操作，这两种操作做事情其实都是在一条流水线上(单线程)，只是这两种操作在单线程上的执行顺序不一样罢了。当js触发到异步任务时，会将异步任务交给浏览器处理，当执行有结果时，会把异步任务的回调函数插入待处理队列的队尾。 通俗的去解释一下异">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2023/04/29/promise/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="目录-异步编程-回调函数-回调地狱-promise 异步编程js语言是单线程机制。所谓单线程就是按次序执行，执行完一个任务再执行下一个。但是不影响存在同步和异步的两种操作，这两种操作做事情其实都是在一条流水线上(单线程)，只是这两种操作在单线程上的执行顺序不一样罢了。当js触发到异步任务时，会将异步任务交给浏览器处理，当执行有结果时，会把异步任务的回调函数插入待处理队列的队尾。 通俗的去解释一下异">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/74d580d4b9924507b5148e6a8a6ae6ea.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a4a0aebebaf54ba7a2b20305c4e0354a.png#pic_center">
+<meta property="article:published_time" content="2023-04-28T16:22:19.871Z">
+<meta property="article:modified_time" content="2023-05-06T11:42:13.616Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/74d580d4b9924507b5148e6a8a6ae6ea.png#pic_center">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -69,9 +76,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-promise" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-promise" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/04/29/promise/" class="article-date">
   <time class="dt-published" datetime="2023-04-28T16:22:19.871Z" itemprop="datePublished">2023-04-29</time>
@@ -142,319 +147,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-词法作用域vs动态作用域" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
-  <time class="dt-published" datetime="2022-12-01T02:48:38.126Z" itemprop="datePublished">2022-12-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/">词法作用域vs动态作用域</a>
-    </h1>
+    <a href="/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">词法作用域vs动态作用域</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="词法作用域和动态作用域有什么不同？"><a href="#词法作用域和动态作用域有什么不同？" class="headerlink" title="词法作用域和动态作用域有什么不同？"></a>词法作用域和动态作用域有什么不同？</h1><p>作用域分为 <strong>静态作用域</strong> 和 __动态作用域__，动态作用域在函数调用时才决定，而静态作用域在编译时期（词法解析阶段）就确定好了，所以也叫词法作用域。</p>
-<pre><code>function fun() &#123;
-    console.log(a)
-&#125;
-
-function bar() &#123;
-    var a=3
-    fun()
-&#125;
-
-var a=1
-
-bar()  // 1
-</code></pre>
-<p>在解释这个例子之前，还得讲解另一个知识点。</p>
-<h2 id="LHS和RHS"><a href="#LHS和RHS" class="headerlink" title="LHS和RHS"></a>LHS和RHS</h2><p>LSH(left-hand side)找到变量所在的容器本身，并且将对该变量进行赋值。</p>
-<p>RHS(right-hand side)查找某个变量的值</p>
-<p>LSH和RSH查找过程通过作用域链进行寻找。作用域链在函数定义的时候创建好。</p>
-<p>现在说回这个例子，在fun函数要执行console.log(a)，就是要找到变量a的值，但是fun函数没有变量a，所以要通过RSH查询（当前作用域&#x3D;&gt;上一级作用域&#x3D;&gt; … &#x3D;&gt; 全局作用域）找到变量a，在全局作用域里找到变量a，于是就输出1。</p>
-<p>下面我们来看看动态作用域的例子（bash采用的是动态作用域)</p>
-<pre><code>#!/bin/bash
-num=1
-function fun1()&#123;
-    echo $num
-&#125;
-
-function fun2()&#123;
-    local num=2
-    fun1   // 2
-&#125;
-fun2
-</code></pre>
-<p>动态作用域会从检查函数调用链，查找目标变量出来，所以就可以对上面的例子继续解释，在fun1函数找不到num变量，就会从调用栈中找到上一级调用fun1的函数fun2，并且在函数fun2找到变量num，所以就会输出2。</p>
-<pre><code>function foo() &#123;
-    console.log(a);
-&#125;
-
-function bar() &#123;
-    var a = 3;
-    foo();
-&#125;
-
-var a = 2;
-bar(); // 2;
-</code></pre>
-<p>这个js程序使用的是词法作用域。如果它使用动态作用域，将会输出什么？</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9Fvs%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F/" data-id="clb4hfi7b0000wst45lul0739" data-title="词法作用域vs动态作用域" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-closure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/12/01/closure/" class="article-date">
-  <time class="dt-published" datetime="2022-11-30T17:50:54.400Z" itemprop="datePublished">2022-12-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/12/01/closure/">What is Closure?</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="闭包是什么？"><a href="#闭包是什么？" class="headerlink" title="闭包是什么？"></a>闭包是什么？</h1><p>在了解闭包之前，我们要先理解JavaScript的作用域——全局作用域和局部作用域（先不考虑块级作用域）。  </p>
-<ul>
-<li><p>在全局作用域下声明的变量就是全局变量.</p>
-</li>
-<li><p>在局部作用域下声明的变量就是局部变量。</p>
-</li>
-</ul>
-<p>因为 <strong>作用域</strong> 链的存在，函数内部可以直接读取全局变量。而函数内部无法读取函数内部的局部变量。</p>
-<p><strong>作用域链是什么？</strong></p>
-<blockquote>
-<p>当在Javascript中使用一个变量的时候，首先Javascript引擎会尝试在当前作用域下去寻找该变量，如果没找到，再到它的上层作用域寻找，以此类推直到找到该变量或是已经到了全局作用域。</p>
-</blockquote>
-<p><strong>闭包的概念</strong></p>
-<blockquote>
-<p>闭包就是在一个函数内部创建另一个函数，让你可以在一个内层函数中访问到其外层函数的作用域。又或者说，闭包就是能够读取其他函数内部变量的函数。</p>
-</blockquote>
-<pre><code>function wrapValue(n) &#123;
-let local = n;
-return () =&gt; local; //内层匿名函数访问外层函数变量n
-&#125;
-
-let wrap1 = wrapValue(1);
-let wrap2 = wrapValue(2);
-console.log(wrap1());
-// → 1
-console.log(wrap2());
-// → 2
-</code></pre>
-<p>这个例子来自于《JavaScript编程精解》，其中给wrap1赋值为一个包含 1 的一个函数<br>此时我们使用求值结果运算符来访问这个函数，函数返回了1，所以我们看到了1</p>
-<p>wrap2 同理</p>
-<pre><code>function multiplier(factor) &#123;
-return number =&gt; number * factor;
-&#125;
-
-let twice = multiplier(2);
-console.log(twice(5));
-// → 10
-</code></pre>
-<h1 id="闭包的作用是什么？"><a href="#闭包的作用是什么？" class="headerlink" title="闭包的作用是什么？"></a>闭包的作用是什么？</h1><p>闭包常常用来「间接访问一个变量」。换句话说，「隐藏一个变量」。</p>
-<p>假设我们在做一个游戏，在写其中关于「还剩几条命」的代码。</p>
-<p>如果不用闭包，你可以直接用一个全局变量：</p>
-<pre><code>window.lives = 30 // 还有三十条命
-</code></pre>
-<p>这样看起来很不妥。万一不小心把这个值改成 -1 了怎么办。所以我们不能让别人「直接访问」这个变量。怎么办呢？</p>
-<p>用局部变量。</p>
-<p>但是用局部变量别人又访问不到，怎么办呢？</p>
-<p>暴露一个访问器（函数），让别人可以「间接访问」。</p>
-<p>代码如下：</p>
-<pre><code>!function()&#123;
-
-var lives = 50
-
-window.奖励一条命 = function()&#123;
-    lives += 1
-&#125;
-
-window.死一条命 = function()&#123;
-    lives -= 1
-&#125;
-
-&#125;()
-</code></pre>
-<p>这就是闭包的第一个优点：<strong>保证函数不受外界干扰，实现封装，避免命名冲突</strong></p>
-<pre><code>function f1()&#123;
-    var n=2;
-    function f2()&#123;
-        var q=0;
-        console.log(&#39;n=&#39;,++n);
-        console.log(&#39;q=&#39;,++q);
-    &#125;
-    return  f2;
-&#125;
-
-var f=f1();
-f() 
-f() //这两个f(n)的结果分别是什么？？
-</code></pre>
-<p>在上面这个例子中， f1 是 f2 的父函数，而 f2 被赋给了一个全局变量，所以f2 始终在内存中，且 f2 的存在依赖于 f1中的n，这就导致变量n无法被销毁，而变量q是每次被调用时新创建的，所以每次f2执行完后它就把属于自己的变量连同自己一起销毁，于是乎最后就剩下孤零零的n。</p>
-<p>这就是闭包的第二个优点： <strong>可以在内存中保存函数变量，不会被垃圾回收机制回收，充当缓存</strong></p>
-<p>但闭包也有缺点： <strong>内存消耗很大，容易造成内存泄漏, 要谨慎使用</strong></p>
-<blockquote>
-<p>内存泄漏：内存泄漏（Memory Leak）是指程序中已动态分配的堆内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。</p>
-</blockquote>
-<p>闭包的作用就是可以在一个函数的内部访问到函数外部的变量。这是因为内部函数对外部函数属于同一作用域内，通过闭包内的函数访问到变量是因为内部函数保持着对变量的 __引用__，当注册一个点击事件的时候，就是一个闭包，当点击事件完成的时候，还会对改变量保持着引用。</p>
-<p>让我们再看看上面的例子,我们已经无法再通过js代码来引用到变量n，但垃圾回收器却认为这个对象还在被引用，因此在回收的时候不会释放它。导致了分配的这块内存永远也无法被释放出来。如果这样的情况越来越多，会导致内存不够用而系统崩溃。</p>
-<blockquote>
-<p>其实内存泄漏并不是闭包造成的，而是通过闭包内的函数对变量的引用，闭包不是真正产生内存泄漏的原因！<br>大量博客记录的实际遇到的闭包产生内存泄漏问题的根本原因就是没有及时的断开对变量的引用，而不是注册监听事件的闭包产生的内存泄漏。如果我们对该引用可以进行控制，就可以解决内存泄漏的问题，而不应该把这个锅甩给无辜的闭包。</p>
-</blockquote>
-<p>解决方法：可以在后面加一句</p>
-<pre><code>f=null
-</code></pre>
-<p>这样就销毁了其返回函数，也就解除了对不能释放的活动对象n的引用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/closure/" data-id="clb3y3vex0000qkt4712qcsmf" data-title="What is Closure?" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-my-first-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/18/my-first-blog/" class="article-date">
-  <time class="dt-published" datetime="2022-11-18T09:54:52.000Z" itemprop="datePublished">2022-11-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/amiii/">amiii</a>►<a class="article-category-link" href="/categories/amiii/amii/">amii</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/18/my-first-blog/">my first blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我的第一篇博客！！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/my-first-blog/" data-id="clambv5sb00005st4av64ff3t" data-title="my first blog" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/18/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2022-11-18T09:18:46.438Z" itemprop="datePublished">2022-11-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/hello-world/" data-id="clamakl4c0000ukt4bvn84ndf" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
