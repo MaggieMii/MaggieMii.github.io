@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="什么是BFC以及BFC的用途什么是BFC定义BFC - Block Formatting Context 块级格式化上下文  BFC的定义，在官方文档到中是这么介绍的：一个BFC区域包含创建该上下文元素的所有子元素，但是不包括创建了新的BFC的子元素的内部元素，BFC是一块块独立的渲染区域，可以将BFC看成是元素的一种属性，拥有了这种属性的元素就会使他的子元素与世隔绝，不会影响到外部其他元素 12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/10/22/%E4%BB%80%E4%B9%88%E6%98%AFBFC%E4%BB%A5%E5%8F%8ABFC%E7%9A%84%E7%94%A8%E9%80%94/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="什么是BFC以及BFC的用途什么是BFC定义BFC - Block Formatting Context 块级格式化上下文  BFC的定义，在官方文档到中是这么介绍的：一个BFC区域包含创建该上下文元素的所有子元素，但是不包括创建了新的BFC的子元素的内部元素，BFC是一块块独立的渲染区域，可以将BFC看成是元素的一种属性，拥有了这种属性的元素就会使他的子元素与世隔绝，不会影响到外部其他元素 12">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/2ad70ebd41da218012adfca472838b0b.png">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/7624be2cd5cbe19138b8ed201dabdfe3.png">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/f4ab05b30df912f1a7cc9dcf5e1f930e.png">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/dae850fd2ef84d2d346dfa13aa3f02d4.png">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/7a193a37b6257a33621a2f9fa8d96436.png">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/de849a7c6dd4752b6d0cdff45ede40e7.png">
+<meta property="og:image" content="https://img-service.csdnimg.cn/img_convert/bc71c7ec9908e03c98e2e2cbc2443113.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0f588409de024b86a030e129e714838e.png">
+<meta property="article:published_time" content="2023-10-22T09:21:09.079Z">
+<meta property="article:modified_time" content="2023-10-22T04:54:01.094Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-service.csdnimg.cn/img_convert/2ad70ebd41da218012adfca472838b0b.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-什么是BFC以及BFC的用途" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/22/%E4%BB%80%E4%B9%88%E6%98%AFBFC%E4%BB%A5%E5%8F%8ABFC%E7%9A%84%E7%94%A8%E9%80%94/" class="article-date">
+  <time class="dt-published" datetime="2023-10-22T09:21:09.079Z" itemprop="datePublished">2023-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是BFC以及BFC的用途"><a href="#什么是BFC以及BFC的用途" class="headerlink" title="什么是BFC以及BFC的用途"></a>什么是BFC以及BFC的用途</h1><h2 id="什么是BFC"><a href="#什么是BFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>BFC - Block Formatting Context 块级格式化上下文</strong> </p>
+<p>BFC的定义，在官方文档到中是这么介绍的：一个BFC区域包含创建该上下文元素的所有子元素，但是不包括创建了新的BFC的子元素的内部元素，BFC是一块块独立的渲染区域，可以将BFC看成是元素的一种属性，拥有了这种属性的元素就会使他的子元素与世隔绝，不会影响到外部其他元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box1&quot;</span> <span class="attr">id</span>=<span class="string">&quot;HM_bfc1&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box3&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box5&quot;</span> <span class="attr">id</span>=<span class="string">&quot;HM_bfc2&quot;</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box6&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box7&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>用这段代码来解释上面那段BFC定义的话，就应该是这个意思：#HM_bfc1是一块BFC区域，这块区域包含了box2、box3、box4、box5，也就是所有#HM_bfc1的子元素。同时#HM_bfc2也创造了一块BFC区域，包含了box6，box7，box8。注意，第一个box1的BFC，只包括box1的子元素box2345，不包括box678。#HM_bfc2这个BFC同样也仅仅是包括自己的子元素box678。</p>
+<p>划重点</p>
+<ol>
+<li><strong>每一个BFC区域只包括其子元素，不包括其子元素的子元素</strong>。(这1点比较容易理解)</li>
+<li><strong>每一个BFC区域都是独立隔绝的,互不影响！</strong>(这点不太好理解，但是后续会使用代码验证)</li>
+</ol>
+<h3 id="触发BFC"><a href="#触发BFC" class="headerlink" title="触发BFC"></a>触发BFC</h3><p>并不是任意一个元素都可以被当做BFC，只有当这个元素满足以下任意一个条件的时候，这个元素才会被当做一个BFC。</p>
+<p><strong>触发BFC的条件</strong></p>
+<ul>
+<li>body根元素</li>
+<li>设置浮动，不包括none</li>
+<li>设置定位，absoulte或者fixed</li>
+<li>行内块显示模式，inline-block</li>
+<li>设置overflow，即hidden，auto，scroll</li>
+<li>表格单元格，table-cell</li>
+<li>弹性布局，flex</li>
+</ul>
+<h2 id="利用BFC解决问题"><a href="#利用BFC解决问题" class="headerlink" title="利用BFC解决问题"></a>利用BFC解决问题</h2><p>在你明白了解BFC的触发规则之后，那么就需要利用BFC的特点来解决我们在布局中遇到的一些问题了，还记得我们之前说过，BFC有一个特点是：<strong>每一个BFC区域都是相互独立，互不影响的。</strong></p>
+<h4 id="1-解决外边距的塌陷问题（垂直塌陷）"><a href="#1-解决外边距的塌陷问题（垂直塌陷）" class="headerlink" title="1 解决外边距的塌陷问题（垂直塌陷）"></a>1 解决外边距的塌陷问题（垂直塌陷）</h4><p> 开发中，前端的布局手段，离不开外边距margin，那么，也会遇到一些问题，例如外边距的垂直塌陷问题。</p>
+<p><img src="https://img-service.csdnimg.cn/img_convert/2ad70ebd41da218012adfca472838b0b.png" alt="img"></p>
+<p>通过以上的实例，我们会发现，代码给两个div盒子，都添加了四个方向的margin，讲道理，学过数学的都知道，100+100&#x3D;200.可是，盒子之间的距离，现在却之后100px。这就是很典型的margin的塌陷，两段margin重叠到了一块，互相影响。那么，如何利用BFC，让这个问题得到解决呢。回忆下，上文说过，BFC，就是一个与世隔绝的独立区域，不会互相影响，那么，我们可以将这两个盒子，放到两个BFC区域中，即可解决这个问题。</p>
+<p><img src="https://img-service.csdnimg.cn/img_convert/7624be2cd5cbe19138b8ed201dabdfe3.png" alt="img"></p>
+<h4 id="2-利用BFC解决包含塌陷"><a href="#2-利用BFC解决包含塌陷" class="headerlink" title="2 利用BFC解决包含塌陷"></a>2 利用BFC解决包含塌陷</h4><p>当父子关系的盒子，给子元素添加margin-top，有可能会把父元素一起带跑</p>
+<p><img src="https://img-service.csdnimg.cn/img_convert/f4ab05b30df912f1a7cc9dcf5e1f930e.png" alt="img"></p>
+<p>原本，正确的显示方式，应该是粉色盒子与红色盒子的顶部距离为50px，但是由于margin的塌陷问题，导致盒子内部的布局影响到了外部。这个时候，就可以触发BFC，将父盒子变成一个独立的区域，这样在BFC区域内部的任何操作，都不会影响到外部。</p>
+<p><img src="https://img-service.csdnimg.cn/img_convert/dae850fd2ef84d2d346dfa13aa3f02d4.png" alt="img"></p>
+<h4 id="3-当浮动产生影响的时候，可以利用BFC来清除浮动的影响"><a href="#3-当浮动产生影响的时候，可以利用BFC来清除浮动的影响" class="headerlink" title="3 当浮动产生影响的时候，可以利用BFC来清除浮动的影响"></a>3 当浮动产生影响的时候，可以利用BFC来清除浮动的影响</h4><p><img src="https://img-service.csdnimg.cn/img_convert/7a193a37b6257a33621a2f9fa8d96436.png" alt="img"></p>
+<p>以上代码表示，一个没有设置高度的父盒子，包含着七个子元素。如果此时，所有的子元素都浮动的话。</p>
+<p><img src="https://img-service.csdnimg.cn/img_convert/de849a7c6dd4752b6d0cdff45ede40e7.png" alt="img"></p>
+<p>当所有的子元素都浮动了，这个时候，父盒子失去了原有的高度，这就是浮动的影响。这个时候，同样也可用BFC的机制，来清除浮动带来的影响。使用BFC，将所有的浮动元素包裹起来。</p>
+<h4 id="4-BFC可以阻止标准流元素被浮动元素覆盖"><a href="#4-BFC可以阻止标准流元素被浮动元素覆盖" class="headerlink" title="4 BFC可以阻止标准流元素被浮动元素覆盖"></a>4 BFC可以阻止标准流元素被浮动元素覆盖</h4><p><img src="https://img-service.csdnimg.cn/img_convert/bc71c7ec9908e03c98e2e2cbc2443113.png" alt="img"></p>
+<p><strong>大家都知道，浮动的元素会脱离文档流，跑到上一个层面，也就是和原本的元素们不在一个层面了。所以可能会导致浮动元素覆盖基本元素的问题。</strong></p>
+<p><strong>那么这个时候我们只需要让蓝色区域触发BFC，就可以做到不受浮动元素影响</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/0f588409de024b86a030e129e714838e.png" alt="在这里插入图片描述"></p>
+<p>当蓝色盒子触发了BFC之后，浮动元素再也不能覆盖它了，而且还能利用这个特性，来实现蓝色盒子宽度根据红色盒子的宽度来做自动适应</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>一个BFC区域只包含其子元素，不包括其子元素的子元素.</li>
+<li>并不是所有的元素都能成为一块BFC区域，只有当这个元素满足条件的时候才会成为一块BFC区域</li>
+<li>不同的BFC区域之间是相互独立的，互不影响的。利用这个特性我们可以让不同BFC区域之间的布局不产生影响.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/10/22/%E4%BB%80%E4%B9%88%E6%98%AFBFC%E4%BB%A5%E5%8F%8ABFC%E7%9A%84%E7%94%A8%E9%80%94/" data-id="clo19guts0000tct4guen2jw1" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/10/22/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AE%83%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/23/js%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js实现继承的6种方式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/amiii/">amiii</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/amiii/amii/">amii</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/22/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AE%83%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/22/%E4%BB%80%E4%B9%88%E6%98%AFBFC%E4%BB%A5%E5%8F%8ABFC%E7%9A%84%E7%94%A8%E9%80%94/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/23/js%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/">js实现继承的6种方式</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/11/%E7%9B%B4%E6%92%AD/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/21/%E5%88%86%E4%BA%AB/">redux的原理、工作流程及其应用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
