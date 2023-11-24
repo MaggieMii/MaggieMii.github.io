@@ -1,286 +1,140 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>redux的原理、工作流程及其应用 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="redux的原理、工作流程及其应用 Redux对于JavaScript应用而言是一个可预测状态的容器。换言之，它是一个应用数据流框架，而不是传统的像underscore.js或者AngularJs那样的库或者框架。  1、什么是redux？redux是专门用于集中式管理状态的javascript库，他并不是react的插件库。 比如你有多个组件A-E都想要用同一个组件D中的状态：1）像以前我们可以">
-<meta property="og:type" content="article">
-<meta property="og:title" content="redux的原理、工作流程及其应用">
-<meta property="og:url" content="http://example.com/2023/05/21/%E5%88%86%E4%BA%AB/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="redux的原理、工作流程及其应用 Redux对于JavaScript应用而言是一个可预测状态的容器。换言之，它是一个应用数据流框架，而不是传统的像underscore.js或者AngularJs那样的库或者框架。  1、什么是redux？redux是专门用于集中式管理状态的javascript库，他并不是react的插件库。 比如你有多个组件A-E都想要用同一个组件D中的状态：1）像以前我们可以">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2023/05/20/7tSbm6zQK51C4JB.jpg">
-<meta property="og:image" content="https://s2.loli.net/2023/05/20/T5i6vj7ar1nKPxC.png">
-<meta property="article:published_time" content="2023-05-21T05:16:45.660Z">
-<meta property="article:modified_time" content="2023-05-21T05:17:46.889Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2023/05/20/7tSbm6zQK51C4JB.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+<!DOCTYPE html><html class="appearance-auto" lang="en"><head><meta charset="UTF-8"><title>redux的原理、工作流程及其应用</title><meta name="description" content="逆风如解意，容易莫摧残"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="redux的原理、工作流程及其应用
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+Redux对于JavaScript应用而言是一个可预测状态的容器。换言之，它是一个应用数据流框架，而不是传统的像underscore.js或者AngularJs那样的库或者框架。
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+1、什么是redux？
+redux是专门用于集中式管理状态的javascript库，他并不是react的插件库。
+比如你有多个组件A-E都想要用同一个组件D中的状态：
+1）像以前我们可以通过父子组件通信的方式让父组件进行传递状态，或者是让兄弟组件之间通过订阅发布进行通信
+2）当我们使用了redux就可以直接通过让redux进行统一的状态管理，谁想要用状态就自己去拿，省去了第一种方法的层层传递
 
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+2、redux的工作流程
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-分享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/21/%E5%88%86%E4%BA%AB/" class="article-date">
-  <time class="dt-published" datetime="2023-05-21T05:16:45.660Z" itemprop="datePublished">2023-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      redux的原理、工作流程及其应用
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="redux的原理、工作流程及其应用"><a href="#redux的原理、工作流程及其应用" class="headerlink" title="redux的原理、工作流程及其应用"></a>redux的原理、工作流程及其应用</h1><blockquote>
+在我们了解redux的工作流程之前我们应该要知道redux有三个核心概.."><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ami's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">redux的原理、工作流程及其应用</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">redux的原理、工作流程及其应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFredux%EF%BC%9F"><span class="toc-text">1、什么是redux？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8Redux"><span class="toc-text">2.项目中使用Redux</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">redux的原理、工作流程及其应用</h1><time class="has-text-grey" datetime="2023-05-21T05:16:45.660Z">2023-05-21</time><article class="mt-2 post-content"><h1>redux的原理、工作流程及其应用</h1>
+<blockquote>
 <p>Redux对于JavaScript应用而言是一个可预测状态的容器。换言之，它是一个应用数据流框架，而不是传统的像underscore.js或者AngularJs那样的库或者框架。</p>
 </blockquote>
-<h2 id="1、什么是redux？"><a href="#1、什么是redux？" class="headerlink" title="1、什么是redux？"></a>1、什么是redux？</h2><p><strong>redux是专门用于集中式管理状态的javascript库</strong>，他并不是react的插件库。</p>
-<p>比如你有多个组件A-E都想要用同一个组件D中的状态：<br>1）像以前我们可以通过父子组件通信的方式让父组件进行传递状态，或者是让兄弟组件之间通过<strong>订阅发布</strong>进行通信<br>2）当我们使用了<strong>redux</strong>就可以直接通过让redux进行统一的状态管理，谁想要用状态就自己去拿，<strong>省去</strong>了第一种方法的<strong>层层传递</strong></p>
+<h2 id="1、什么是redux？">1、什么是redux？</h2>
+<p><strong>redux是专门用于集中式管理状态的javascript库</strong>，他并不是react的插件库。</p>
+<p>比如你有多个组件A-E都想要用同一个组件D中的状态：<br>
+1）像以前我们可以通过父子组件通信的方式让父组件进行传递状态，或者是让兄弟组件之间通过<strong>订阅发布</strong>进行通信<br>
+2）当我们使用了<strong>redux</strong>就可以直接通过让redux进行统一的状态管理，谁想要用状态就自己去拿，<strong>省去</strong>了第一种方法的<strong>层层传递</strong></p>
 <p><img src="https://s2.loli.net/2023/05/20/7tSbm6zQK51C4JB.jpg" alt="fa5eae9ac95848919417daff9ae5c20d.jpeg"></p>
 <p><strong>2、redux的工作流程</strong></p>
 <blockquote>
 <p>在我们了解redux的工作流程之前我们应该要知道redux有三个核心概念，分别为actions、store、reducers（带s的表明可能存在多个）</p>
 </blockquote>
-<p><strong>1）actions</strong><br>actions英文直译过来就是行动、动作的意思，那么我们就可以猜到他表示的是“怎么做”，简单来说actions就是一个对象，actions里面有两个属性分别为<strong>type</strong>和<strong>data</strong>：<br>type：标识属性，值为字符串且唯一，必要属性（你想要做什么事情<br>data：数据属性，值为任意类型，可选属性（你要做事情的数据</p>
+<p><strong>1）actions</strong><br>
+actions英文直译过来就是行动、动作的意思，那么我们就可以猜到他表示的是“怎么做”，简单来说actions就是一个对象，actions里面有两个属性分别为<strong>type</strong>和<strong>data</strong>：<br>
+type：标识属性，值为字符串且唯一，必要属性（你想要做什么事情<br>
+data：数据属性，值为任意类型，可选属性（你要做事情的数据</p>
 <p>那我们浅浅举个栗子：比如计算器你可以进行加1减2等操作，那么加减乘除这个操作就是你的type，数字就是你的数据</p>
-<p><strong>2）store</strong><br>store有且只能有一个，他相当于一个最高指挥家，他负责把action动作交给对应的reducer进行执行，也就是说将state、action和reducer联系在一起的对象。</p>
-<p><strong>3）reducer</strong><br>reducer用于将store发过来的action完成并将结果返回给store，他接收两个参数preState（旧状态）和action（动作）并返回一个newState（新状态）。</p>
+<p><strong>2）store</strong><br>
+store有且只能有一个，他相当于一个最高指挥家，他负责把action动作交给对应的reducer进行执行，也就是说将state、action和reducer联系在一起的对象。</p>
+<p><strong>3）reducer</strong><br>
+reducer用于将store发过来的action完成并将结果返回给store，他接收两个参数preState（旧状态）和action（动作）并返回一个newState（新状态）。</p>
 <p>比如像计算器我们需要在原来的数据上进行加1的操作，那么旧状态旧对应原来的数据，action对应加1的操作，返回的新状态就是计算器加完之后重新返回的结果。</p>
-<p><strong>那么他的工作流程是什么样的呢？</strong><br><img src="https://s2.loli.net/2023/05/20/T5i6vj7ar1nKPxC.png" alt="75e02503f8374e88a1678083336f0d71.png"><br>1）首先我们要确定我们要做什么<br>2）让Action Creators创建action（也就是你要做的事情）<br>3）通过dispatch将action分发出去<br>4）store对要使用的reducer进行绑定，然后将action分发到对应的reducer上<br>5）在reducer上进行相应的action操作并返回结果给store<br>6）组件就可以通过store的API像store进行获取操作返回的结果  </p>
-<h2 id="2-项目中使用Redux"><a href="#2-项目中使用Redux" class="headerlink" title="2.项目中使用Redux"></a>2.项目中使用Redux</h2><p>这里就新建项目然后使用redux完成一个小案例</p>
+<p><strong>那么他的工作流程是什么样的呢？</strong><br>
+<img src="https://s2.loli.net/2023/05/20/T5i6vj7ar1nKPxC.png" alt="75e02503f8374e88a1678083336f0d71.png"><br>
+1）首先我们要确定我们要做什么<br>
+2）让Action Creators创建action（也就是你要做的事情）<br>
+3）通过dispatch将action分发出去<br>
+4）store对要使用的reducer进行绑定，然后将action分发到对应的reducer上<br>
+5）在reducer上进行相应的action操作并返回结果给store<br>
+6）组件就可以通过store的API像store进行获取操作返回的结果</p>
+<h2 id="2-项目中使用Redux">2.项目中使用Redux</h2>
+<p>这里就新建项目然后使用redux完成一个小案例</p>
 <p>比如我们的微信和支付宝都绑定了同一张银行卡,当我们去使用支付宝或者微信支付的时候,对应的这个银行卡上的余额就会减少。也就是说支付宝和微信共享了银行卡的账户余额。</p>
 <p>项目中要用到Redux，所以要先进行下载</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D redux</span><br></pre></td></tr></table></figure>
+<pre><code>npm i -D redux
+</code></pre>
 <p>我们来捋一捋实现这个功能的思路，在微信和支付宝端余额显示相同。思路是建立一个文件夹叫store，index.js中是我们用来创建store的,然后建立一个action来放咱们的一些action,我们通过action来修改store,连接action和store的是我们的reducer ,reducer是一个纯函数</p>
-<p>store&#x2F;index.js :</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; legacy_createStore <span class="keyword">as</span> createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(reducer)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+<p>store/index.js :</p>
+<pre><code class="language-javascript">import &#123; legacy_createStore as createStore &#125; from 'redux'
+import reducer from './reducer'
 
+const store = createStore(reducer)
+
+export default store
+</code></pre>
 <p>新建canstance.js文件，在里面定义对应的方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">INCREMENT</span> = <span class="string">&#x27;INCREMENT&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">DECREMENT</span> = <span class="string">&#x27;DECREMENT&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">ADD_NUMBER</span> = <span class="string">&#x27;ADD_NUMBER&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">SUB_NUMBER</span> = <span class="string">&#x27;SUB_NUMBER&#x27;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="language-javascript">export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+export const ADD_NUMBER = 'ADD_NUMBER'
+export const SUB_NUMBER = 'SUB_NUMBER'
+</code></pre>
 <p>然后创建action的内容，新建action文件：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">INCREMENT</span>, <span class="variable constant_">DECREMENT</span>, <span class="variable constant_">ADD_NUMBER</span>, <span class="variable constant_">SUB_NUMBER</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./canstance&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">incAction</span> = num =&gt;(&#123; <span class="attr">type</span>: <span class="variable constant_">INCREMENT</span>, num &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">decAction</span> = num =&gt;(&#123; <span class="attr">type</span>: <span class="variable constant_">DECREMENT</span>, num &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">addAction</span> = num =&gt;(&#123; <span class="attr">type</span>: <span class="variable constant_">ADD_NUMBER</span>, num &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">subAction</span> = num =&gt;(&#123; <span class="attr">type</span>: <span class="variable constant_">SUB_NUMBER</span>, num &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="language-javascript">import &#123; INCREMENT, DECREMENT, ADD_NUMBER, SUB_NUMBER &#125; from './canstance'
+
+export const incAction = num =&gt;(&#123; type: INCREMENT, num &#125;)
+export const decAction = num =&gt;(&#123; type: DECREMENT, num &#125;)
+export const addAction = num =&gt;(&#123; type: ADD_NUMBER, num &#125;)
+export const subAction = num =&gt;(&#123; type: SUB_NUMBER, num &#125;)
+
+</code></pre>
 <p>最后新建reducer文件，建立store和action之间的联系：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">INCREMENT</span>, <span class="variable constant_">DECREMENT</span>, <span class="variable constant_">ADD_NUMBER</span>, <span class="variable constant_">SUB_NUMBER</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./canstance&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> initState = &#123;</span><br><span class="line">    <span class="attr">money</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state=initState, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="attr">INCREMENT</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;...state, <span class="attr">money</span>: state.<span class="property">money</span> + <span class="number">1</span>&#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="attr">DECREMENT</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;...state, <span class="attr">money</span>: state.<span class="property">money</span> - <span class="number">1</span>&#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="attr">ADD_NUMBER</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;...state, <span class="attr">money</span>: state.<span class="property">money</span> + action.<span class="property">num</span>&#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="attr">SUB_NUMBER</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;...state, <span class="attr">money</span>: state.<span class="property">money</span> - action.<span class="property">num</span>&#125;</span><br><span class="line">        <span class="attr">default</span>: </span><br><span class="line">        <span class="keyword">return</span> state</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducer</span><br></pre></td></tr></table></figure>
-<p>最后来到开始创建的alipay.js和wxpay.js，这两个文件里面的内容大致相同，下面就举例说明一个<br>1.引入store.js<br>2.定义state状态，利用store .getState().money进行取值<br>3.在componentDidMount中进行值的更新</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; <span class="title class_">PureComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;../store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; addAction, subAction &#125; <span class="keyword">from</span> <span class="string">&#x27;../store/action&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Alipay</span> <span class="keyword">extends</span> <span class="title class_ inherited__">PureComponent</span> &#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    <span class="attr">money</span>: store.<span class="title function_">getState</span>().<span class="property">money</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    store.<span class="title function_">subscribe</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123;<span class="attr">money</span>: store.<span class="title function_">getState</span>().<span class="property">money</span>&#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>支付宝<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>余额：&#123;this.state.money&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;e</span> =&gt;</span> this.decrement(1)&#125;&gt;付钱<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;e</span> =&gt;</span> this.makemoney(100)&#125;&gt;收钱<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">decrement</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    store.<span class="title function_">dispatch</span>(<span class="title function_">subAction</span>(num))</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">makemoney</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    store.<span class="title function_">dispatch</span>(<span class="title function_">addAction</span>(num))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Alipay</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/05/21/%E5%88%86%E4%BA%AB/" data-id="clhwyy73q0000r0t47y8pc5gd" data-title="redux的原理、工作流程及其应用" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2023/09/11/%E7%9B%B4%E6%92%AD/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2023/04/29/promise/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">promise</div>
-    </a>
-  
-</nav>
+<pre><code class="language-javascript">import &#123; INCREMENT, DECREMENT, ADD_NUMBER, SUB_NUMBER &#125; from './canstance'
 
-  
-</article>
+const initState = &#123;
+    money: 0
+&#125;
 
+const reducer = (state=initState, action) =&gt; &#123;
+    switch(action.type) &#123;
+        case INCREMENT:
+            return &#123;...state, money: state.money + 1&#125;
+        case DECREMENT:
+            return &#123;...state, money: state.money - 1&#125;
+        case ADD_NUMBER:
+            return &#123;...state, money: state.money + action.num&#125;
+        case SUB_NUMBER:
+            return &#123;...state, money: state.money - action.num&#125;
+        default: 
+        return state
+    &#125;
+&#125;
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/amiii/">amiii</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/amiii/amii/">amii</a></li></ul></li></ul>
-    </div>
-  </div>
+export default reducer
+</code></pre>
+<p>最后来到开始创建的alipay.js和wxpay.js，这两个文件里面的内容大致相同，下面就举例说明一个<br>
+1.引入store.js<br>
+2.定义state状态，利用store .getState().money进行取值<br>
+3.在componentDidMount中进行值的更新</p>
+<pre><code class="language-javascript">import React, &#123; PureComponent &#125; from 'react'
+import store from '../store'
+import &#123; addAction, subAction &#125; from '../store/action'
 
+export class Alipay extends PureComponent &#123;
+  state = &#123;
+    money: store.getState().money
+  &#125;
 
-  
-    
+  componentDidMount() &#123;
+    store.subscribe(() =&gt; &#123;
+      this.setState(&#123;money: store.getState().money&#125;)
+    &#125;)
+  &#125;
 
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li></ul>
-    </div>
-  </div>
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;支付宝&lt;/h1&gt;
+        &lt;h2&gt;余额：&#123;this.state.money&#125;&lt;/h2&gt;
+        &lt;button onClick=&#123;e =&gt; this.decrement(1)&#125;&gt;付钱&lt;/button&gt;
+        &lt;button onClick=&#123;e =&gt; this.makemoney(100)&#125;&gt;收钱&lt;/button&gt;
+      &lt;/div&gt;
+    )
+  &#125;
+  decrement(num) &#123;
+    store.dispatch(subAction(num))
+  &#125;
+  makemoney(num) &#123;
+    store.dispatch(addAction(num))
+  &#125;
+&#125;
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/10/22/%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%AE%9A%E4%B9%89%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AE%83%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/22/%E4%BB%80%E4%B9%88%E6%98%AFBFC%E4%BB%A5%E5%8F%8ABFC%E7%9A%84%E7%94%A8%E9%80%94/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/23/js%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/">js实现继承的6种方式</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/11/%E7%9B%B4%E6%92%AD/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/21/%E5%88%86%E4%BA%AB/">redux的原理、工作流程及其应用</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-</body>
-</html>
+export default Alipay
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/09/11/%E7%9B%B4%E6%92%AD/" title=""><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">Previous: </span></a><a class="button is-default" href="/2023/04/29/promise/" title="promise"><span class="has-text-weight-semibold">Next: promise</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/MaggieMi"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> ami 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
