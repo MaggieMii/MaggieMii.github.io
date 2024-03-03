@@ -1,0 +1,405 @@
+<!DOCTYPE html><html class="appearance-auto" lang="en"><head><meta charset="UTF-8"><title>echarts</title><meta name="description" content="逆风如解意，容易莫摧残"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="echarts入门
+一.echarts的介绍
+1.echarts是一款基于JavaScript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。ECharts最初由百度团队开源，并于2018年初捐赠给Apache基金会，成为ASF孵化级项目。
+2.学习一项技术的关键，还是需要多读官方文档，官网链接Apache ECharts,与之类似的图表库还有D3，HeightCharts。
+3.echarts的下载（1）从 npm 获取
+npm install echarts --save
+
+（2）从 CDN 获取（3）从 GitHub 获取
+二.echarts语法
+一.echarts常见术语
+
+
+
+英文
+汉语
+
+
+
+
+title
+标题
+
+
+legend
+图例
+
+
+tooltip
+提示
+
+
+xA.."><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ami's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">echarts</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">echarts入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-echarts%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="toc-text">一.echarts的介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-echarts%E8%AF%AD%E6%B3%95"><span class="toc-text">二.echarts语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-echarts-%E4%B8%AD%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%AE%80%E4%BB%8B"><span class="toc-text">三.echarts 中的样式简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E5%B1%80%E9%83%A8"><span class="toc-text">四.动态显示局部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E7%BC%93%E5%8A%A8%E5%8A%A8%E7%94%BB"><span class="toc-text">五.缓动动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-echarts%E5%BA%94%E7%94%A8"><span class="toc-text">三.echarts应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">在taro+react构建的微信小程序里引入echarts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%95%E5%85%A5-%E7%BB%84%E4%BB%B6-ec-canvas"><span class="toc-text">1. 引入 组件 ec-canvas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E9%85%8D%E7%BD%AE-usingComponents%E5%B1%9E%E6%80%A7"><span class="toc-text">2.在页面配置文件中配置  usingComponents属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B0%81%E8%A3%85%E5%9B%BE%E8%A1%A8%E7%BB%84%E4%BB%B6"><span class="toc-text">3.小程序封装图表组件</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/echarts"><i class="tag post-item-tag">echarts</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">echarts</h1><time class="has-text-grey" datetime="2024-03-02T16:00:00.000Z">2024-03-03</time><article class="mt-2 post-content"><h1>echarts入门</h1>
+<h2 id="一-echarts的介绍">一.echarts的介绍</h2>
+<p>1.echarts是一款基于JavaScript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。ECharts最初由百度团队开源，并于2018年初捐赠给Apache基金会，成为ASF孵化级项目。<br>
+2.学习一项技术的关键，还是需要多读官方文档，官网链接Apache ECharts,与之类似的图表库还有D3，HeightCharts。<br>
+3.echarts的下载（1）从 npm 获取</p>
+<pre><code>npm install echarts --save
+</code></pre>
+<p>（2）从 CDN 获取（3）从 GitHub 获取</p>
+<h2 id="二-echarts语法">二.echarts语法</h2>
+<p>一.echarts常见术语</p>
+<table>
+<thead>
+<tr>
+<th>英文</th>
+<th>汉语</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>标题</td>
+</tr>
+<tr>
+<td>legend</td>
+<td>图例</td>
+</tr>
+<tr>
+<td>tooltip</td>
+<td>提示</td>
+</tr>
+<tr>
+<td>xAxis</td>
+<td>x轴线</td>
+</tr>
+<tr>
+<td>yAxis</td>
+<td>y轴线</td>
+</tr>
+<tr>
+<td>series</td>
+<td>系列</td>
+</tr>
+<tr>
+<td>data</td>
+<td>数据</td>
+</tr>
+</tbody>
+</table>
+<p>二.图表常见类型<br>
+bar 柱状图<br>
+line折线图<br>
+(1)曲线图加上<code>smooth:true;</code>就会变成曲线图<br>
+(2)面积图加上<code>areaStyle:&#123;fill:“#f70”&#125;</code> 会变成面积图<br>
+pie 饼形图（1）加上<code>radius:[80,50]</code> 会变成环形图</p>
+<h2 id="三-echarts-中的样式简介">三.echarts 中的样式简介</h2>
+<ol>
+<li class="lvl-3">
+<p>颜色主题（1）主题可以通过切换深色模式，直接看到采用主题的效果通过light 、dark切换定制主题，具体可以参考官网，需要导入下载的js文件</p>
+</li>
+</ol>
+<pre><code class="language-javascript">// HTML 引入 vintage.js 文件后（假设主题名称是 &quot;vintage&quot;）
+var chart = echarts.init(dom, 'vintage');
+// ...
+
+</code></pre>
+<p>（2）color调色盘在 option 中设置。可以设置全局的调色盘，也可以设置系列自己专属的调色盘。全局调色盘option.color</p>
+<pre><code class="language-javascript">option.color：color: [&quot;pink&quot;, &quot;#ff0&quot;, &quot;#f0f&quot;, &quot;#0ff&quot;]
+</code></pre>
+<p>局部调色盘series.item.color</p>
+<pre><code class="language-javascript">series: [
+    &#123;
+      type: 'bar',
+      // 此系列自己的调色盘。
+      color: [
+        '#dd6b66',
+        '#759aa0',
+        '#e69d87',
+        '#8dc1a9',
+        '#ea7e53',
+        '#eedd78',
+        '#73a373',
+        '#73b9bc',
+        '#7289ab',
+        '#91ca8c',
+        '#f49f42'
+      ]
+     
+    &#125;,
+</code></pre>
+<p>（3）itemStyle项的颜色</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>itemStyle:{color:“#00f” }</p>
+</li>
+<li class="lvl-2">
+<p>高亮的样式emphasis</p>
+<pre><code class="language-javascript">itemStyle:&#123;
+normal:&#123;color:&quot;#93da6c&quot;&#125;,
+emphasis:&#123;color:&quot;#bcff57&quot;&#125;
+&#125;
+</code></pre>
+<ol start="2">
+<li class="lvl-5">
+<p>特殊样式渐变色（1）定义渐变</p>
+<pre><code class="language-javascript">// 定义渐变
+	var linear = &#123;
+	  type: 'linear',
+	  x: 0,
+	  y: 0,
+	  x2: 0,
+	  y2:1,
+	  colorStops: [&#123;
+		  offset: 0, color: '#02bcff' // 0% 处的颜色
+	  &#125;, &#123;
+		  offset: 1, color: '#5555ff' // 100% 处的颜色
+	  &#125;],
+	  global: false // 缺省为 false
+	&#125;
+
+</code></pre>
+<p>（2）使用渐变</p>
+<pre><code class="language-javascript">itemStyle:&#123;
+	color:linear,
+	borderRadius:[30,30,0,0]
+		&#125;
+</code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="四-动态显示局部">四.动态显示局部</h2>
+<ol>
+<li class="lvl-3">
+<p>定义option</p>
+</li>
+<li class="lvl-3">
+<p>修改option值</p>
+</li>
+<li class="lvl-3">
+<p>echart.setOption(option);更新数据和视图</p>
+</li>
+</ol>
+<h2 id="五-缓动动画">五.缓动动画</h2>
+<p>动画延迟 animationDelay</p>
+<p>动画时长 animationDuration</p>
+<p>动画缓动函数 animationEasing</p>
+<pre><code class="language-javascript">animationDelay: function(idx) &#123;
+					// 越往后的数据延迟越大
+					return idx * 200;
+				&#125;,
+				animationDuration: function(idx) &#123;
+					// 每小格动画的时候
+					return idx * 200;
+				&#125;,
+				// 弹性的方式出现动画
+				animationEasing: &quot;bounceInOut&quot;
+			&#125;
+
+</code></pre>
+<h2 id="三-echarts应用">三.echarts应用</h2>
+<pre><code class="language-javascript">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset=&quot;utf-8&quot;&gt;
+		&lt;title&gt;&lt;/title&gt;
+		&lt;!-- 01 导入js --&gt;
+		&lt;script src=&quot;js/echarts.min.js&quot;&gt;&lt;/script&gt;
+		&lt;!-- 03 设置容器的样式 --&gt;
+		&lt;style&gt;
+			#container&#123;
+				width: 800px;
+				height: 600px;
+			&#125;
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;!-- 02 创建个容器 --&gt;
+		&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+	&lt;/body&gt;
+	&lt;script&gt;
+		//04 实例化echarts
+		// 4.1 创建一个实例
+		var echart = echarts.init(document.getElementById(&quot;container&quot;))
+		// 4.2 定义配置项
+		var option = &#123;
+			// 图表的标题
+			title:&#123;
+				text:&quot;我的第一个图表&quot;
+			&#125;,
+			// 图表的提示
+			tooltip:&#123;&#125;,
+			// 图例
+			legend:&#123;data:[&quot;睡眠时长&quot;]&#125;,
+			// x轴线
+			xAxis:&#123;data:[&quot;周一&quot;,&quot;周二&quot;,&quot;周三&quot;,&quot;周四&quot;,&quot;周五&quot;,&quot;周六&quot;,&quot;周日&quot;]&#125;,
+			// y轴线
+			yAxis:&#123;&#125;,
+			// 设置数据
+			series:[
+				&#123;
+					// 数据名称
+					name:&quot;睡眠时长&quot;,
+					// 类型为柱状图
+					type:&quot;bar&quot;,
+					// 数据data
+					data:[8,10,4,5,9,4,8]
+					&#125;
+			]
+		&#125;
+		// 4.3 更新配置
+		echart.setOption(option);
+		// chart图表，set设置 Option选项  data数据 type类型 bar条（柱状条），series系列（数据） Axis轴线 xAxis水平轴线 
+		// legend传奇（图例） tooltip 提示 init初始化 document文档 
+	&lt;/script&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h1>在taro+react构建的微信小程序里引入echarts</h1>
+<h2 id="1-引入-组件-ec-canvas">1. 引入 组件 ec-canvas</h2>
+<p>下载Echarts官方的小程序插件echarts-for-weixin <a target="_blank" rel="noopener" href="https://github.com/ecomfe/echarts-for-weixin">传送门</a></p>
+<p><img src="https://img-blog.csdnimg.cn/c8b4e2c4f67c43dd88457ada54a57fc5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAVl9BWUFfVg==,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<ol>
+<li class="lvl-3">
+<p>将项目中的ec-<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=canvas&amp;spm=1001.2101.3001.7020">canvas</a>文件夹复制保存</p>
+</li>
+<li class="lvl-3">
+<p>去Echarts官网定制图表(不建议全部下载，文件太大，小程序体积大需要分包) <a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/builder.html">传送门</a></p>
+</li>
+<li class="lvl-3">
+<p>压缩echarts.js文件(压缩方法可以自行找线上压缩网站或自行压缩，方法附后文）</p>
+</li>
+<li class="lvl-3">
+<p>替换ec-canvas文件中的echarts.js文件</p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/375e575d3d6542d0915643b9ac1e9cda.png" alt="在这里插入图片描述"></p>
+<h2 id="2-在页面配置文件中配置-usingComponents属性">2.在页面配置文件中配置  usingComponents属性</h2>
+<pre><code class="language-javascript">export default &#123;
+  usingComponents: &#123;
+    // 定义需要引入的第三方组件
+    // 1. key 值指定第三方组件名字，以小写开头
+    // 2. value 值指定第三方组件 js 文件的相对路径
+    'ec-canvas': '../../components/ec-canvas/ec-canvas'
+  &#125;
+&#125;
+</code></pre>
+<h2 id="3-小程序封装图表组件">3.小程序封装图表组件</h2>
+<pre><code class="language-js"> class Chart extends Component &#123;
+
+    constructor(props) &#123;
+      super(props)
+      this.state = &#123;
+        ec: &#123;
+          onInit: function (canvas, width, height) &#123;
+            const chart = echarts.init(canvas, null, &#123;
+              width: width,
+              height: height
+            &#125;);
+            canvas.setChart(chart);
+            const option = &#123;
+              title: &#123;
+                text: 'Distribution of Electricity',
+                subtext: 'Fake Data'
+              &#125;,
+              tooltip: &#123;
+                trigger: 'axis',
+                axisPointer: &#123;
+                  type: 'cross'
+                &#125;
+              &#125;,
+              toolbox: &#123;
+                show: true,
+                feature: &#123;
+                  saveAsImage: &#123;&#125;
+                &#125;
+              &#125;,
+              xAxis: &#123;
+                type: 'category',
+                boundaryGap: false,
+                // prettier-ignore
+                data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+              &#125;,
+              yAxis: &#123;
+                type: 'value',
+                axisLabel: &#123;
+                  formatter: '&#123;value&#125; W'
+                &#125;,
+                axisPointer: &#123;
+                  snap: true
+                &#125;
+              &#125;,
+              visualMap: &#123;
+                show: false,
+                dimension: 0,
+                pieces: [
+                  &#123;
+                    lte: 6,
+                    color: 'green'
+                  &#125;,
+                  &#123;
+                    gt: 6,
+                    lte: 8,
+                    color: 'red'
+                  &#125;,
+                  &#123;
+                    gt: 8,
+                    lte: 14,
+                    color: 'green'
+                  &#125;,
+                  &#123;
+                    gt: 14,
+                    lte: 17,
+                    color: 'red'
+                  &#125;,
+                  &#123;
+                    gt: 17,
+                    color: 'green'
+                  &#125;
+                ]
+              &#125;,
+              series: [
+                &#123;
+                  name: 'Electricity',
+                  type: 'line',
+                  smooth: true,
+                  // prettier-ignore
+                  data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+                  markArea: &#123;
+                    itemStyle: &#123;
+                      color: 'rgba(255, 173, 177, 0.4)'
+                    &#125;,
+                    data: [
+                      [
+                        &#123;
+                          name: 'Morning Peak',
+                          xAxis: '07:30'
+                        &#125;,
+                        &#123;
+                          xAxis: '10:00'
+                        &#125;
+                      ],
+                      [
+                        &#123;
+                          name: 'Evening Peak',
+                          xAxis: '17:30'
+                        &#125;,
+                        &#123;
+                          xAxis: '21:15'
+                        &#125;
+                      ]
+                    ]
+                  &#125;
+                &#125;
+              ]
+            &#125;;
+            chart.setOption(option)
+            return chart;
+          &#125;
+        &#125;
+      &#125;
+    &#125;
+    render() &#123;
+      return (
+          &lt;View className='canvas-container'&gt;
+            &lt;ec-canvas id='mychart-dom-bar' canvas-id='mychart-bar' ec=&#123;this.state.ec&#125;&gt;&lt;/ec-canvas&gt;
+          &lt;/View&gt;
+      )
+    &#125;
+  &#125;
+</code></pre>
+<p>在需要使用图表的部分插入<code>&lt;Chart&gt;&lt;/Chart&gt;</code>即可。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2024/01/26/React%E8%B7%AF%E7%94%B1/" title="React路由"><span class="has-text-weight-semibold">Next: React路由</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/MaggieMi"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> ami 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
