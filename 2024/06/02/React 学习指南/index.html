@@ -6,7 +6,7 @@ React 是 Facebook 于 2013 年开源的 JS 库，用于构建用户界面。这
 我们首先让大家接触 Hyperapp ，而不是直接学 React，就是因为 React 本身的设计思想，其实很简单。就是 UI = f(state)。而 Hyperapp 就是基于这个思想设计的简化版 React。
 所以 React 相比 Hyperapp，更强大，适合真正的生产级别应用。但核心思想其实是一致的。懂了 Hyperapp，你可以很快上手 React。
 React 的组件也是一个函数（React 16 之前只支持 Class 组件，不过目前我们一般都使用 React 16+，可以全盘使用函数式组.."><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ami's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">React学习指南</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">React 学习指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%AD%A6%E8%80%85%E7%9C%8B%E8%BF%99%E9%87%8C"><span class="toc-text">初学者看这里</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%AD%90%EF%BC%9AReact-%E4%B8%8E-Hyperapp"><span class="toc-text">引子：React 与 Hyperapp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%9D%90%E6%96%99%E6%8E%A8%E8%8D%90"><span class="toc-text">学习材料推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A0"><span class="toc-text">小练习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%86%85%E5%AE%B9"><span class="toc-text">进阶内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7vs%E9%9D%9E%E5%8F%97%E6%8E%A7"><span class="toc-text">受控vs非受控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">受控组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">非受控组件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-Topics"><span class="toc-text">Advanced Topics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ErrorBoundary"><span class="toc-text">ErrorBoundary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%94%99%E8%AF%AF%E8%BE%B9%E7%95%8C%E6%8D%95%E8%8E%B7%E6%B8%B2%E6%9F%93%E9%94%99%E8%AF%AF"><span class="toc-text">使用错误边界捕获渲染错误</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-react-error-boundary"><span class="toc-text">使用 react-error-boundary</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AHOC-renderProps"><span class="toc-text">设计模式：HOC + renderProps</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#render-props%E6%A8%A1%E5%BC%8F"><span class="toc-text">render props模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">示例：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#render-props-%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">render props 的特点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-text">使用场景：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HOC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">HOC设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HOC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">HOC的主要特点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A-2"><span class="toc-text">使用场景：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-text">相同点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-text">不同点：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/React"><i class="tag post-item-tag">React</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">React学习指南</h1><time class="has-text-grey" datetime="2024-06-01T16:00:00.000Z">2024-06-02</time><article class="mt-2 post-content"><h1>React 学习指南</h1>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">ami's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">React学习指南</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">React 学习指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%AD%A6%E8%80%85%E7%9C%8B%E8%BF%99%E9%87%8C"><span class="toc-text">初学者看这里</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%AD%90%EF%BC%9AReact-%E4%B8%8E-Hyperapp"><span class="toc-text">引子：React 与 Hyperapp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%9D%90%E6%96%99%E6%8E%A8%E8%8D%90"><span class="toc-text">学习材料推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A0"><span class="toc-text">小练习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E5%86%85%E5%AE%B9"><span class="toc-text">进阶内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7vs%E9%9D%9E%E5%8F%97%E6%8E%A7"><span class="toc-text">受控vs非受控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">受控组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">非受控组件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-Topics"><span class="toc-text">Advanced Topics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ErrorBoundary"><span class="toc-text">ErrorBoundary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%94%99%E8%AF%AF%E8%BE%B9%E7%95%8C%E6%8D%95%E8%8E%B7%E6%B8%B2%E6%9F%93%E9%94%99%E8%AF%AF"><span class="toc-text">使用错误边界捕获渲染错误</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-react-error-boundary"><span class="toc-text">使用 react-error-boundary</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9AHOC-renderProps"><span class="toc-text">设计模式：HOC + renderProps</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#render-props%E6%A8%A1%E5%BC%8F"><span class="toc-text">render props模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">示例：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#render-props-%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">render props 的特点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-text">使用场景：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HOC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">HOC设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HOC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-text">HOC的主要特点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A-2"><span class="toc-text">使用场景：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-text">相同点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-text">不同点：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Hooks"><span class="toc-text">自定义 Hooks</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81useUpdateEffect"><span class="toc-text">1、useUpdateEffect</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81useTitle"><span class="toc-text">2、useTitle</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81useForceUpdate"><span class="toc-text">3、useForceUpdate</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81useDebounce"><span class="toc-text">4、useDebounce</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81useThrottle"><span class="toc-text">5、useThrottle</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81useInterval"><span class="toc-text">6、useInterval</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/React"><i class="tag post-item-tag">React</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">React学习指南</h1><time class="has-text-grey" datetime="2024-06-01T16:00:00.000Z">2024-06-02</time><article class="mt-2 post-content"><h1>React 学习指南</h1>
 <h2 id="初学者看这里">初学者看这里</h2>
 <h3 id="引子：React-与-Hyperapp">引子：React 与 Hyperapp</h3>
 <p>React 是 Facebook 于 2013 年开源的 JS 库，用于构建用户界面。这也是目前前端界最流行的 UI 基础库。</p>
@@ -481,7 +481,322 @@ Render Props是通过props将一个函数传递给组件，这个函数允许组
 Render Props允许组件在渲染过程中向内部传递数据，通常是通过props中的回调函数。在Render Props中，数据流是从内部向外部。</p>
 </li>
 </ol>
-<h2 id="原理">原理</h2>
+<h4 id="自定义-Hooks">自定义 Hooks</h4>
+<p>任何相对独立、复用性强的逻辑,都可以 提取 为自定义 Hook，自定义 Hook 是一种复用 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=React&amp;spm=1001.2101.3001.7020">React</a> 的状态逻辑的函数。</p>
+<p><strong>为什么要用自定义 Hook?</strong></p>
+<ol>
+<li class="lvl-3">
+<p><strong>提炼能复用的逻辑</strong><br>
+许多组件有相似的状态逻辑,使用自定义 Hook 可以很方便地提取出来复用。</p>
+</li>
+<li class="lvl-3">
+<p><strong>解决复杂组件的可读性问题</strong><br>
+使用自定义 Hook 将复杂组件拆分为更小的功能独立的函数,有助于提高代码的可读性。</p>
+</li>
+<li class="lvl-3">
+<p><strong>管理数据更新</strong><br>
+使用独立的 Hook 函数来管理数据请求、处理异步逻辑、数据缓存等,易于维护。</p>
+</li>
+<li class="lvl-3">
+<p><strong>分离状态逻辑</strong><br>
+自定义 Hook 让函数组件更纯粹,只负责 UI,状态逻辑则交给 Hook。</p>
+</li>
+<li class="lvl-3">
+<p><strong>调用其他 Hook</strong><br>
+自定义 Hook 本身还可以调用 useState、useEffect 等其他 React Hook。</p>
+</li>
+</ol>
+<p>以下是总结的一些<strong>常用的hooks</strong>：</p>
+<h5 id="1、useUpdateEffect">1、useUpdateEffect</h5>
+<p><strong>useUpdateEffect作用</strong><br>
+useUpdateEffect 是一个自定义的 React Hook，用于在组件更新时执行副作用操作。它类似于 React 的 useEffect，但是会<strong>忽略组件的初始渲染阶段</strong>，只在<strong>组件更新时</strong>执行副作用操作。</p>
+<ol>
+<li class="lvl-3">
+<p><strong>避免初始渲染时执行副作用</strong>：有些副作用操作可能只需要在组件更新时执行，例如发送网络请求、更新特定状态等。使用 useUpdateEffect 可以确保这些副作用操作在初始渲染时被跳过，只在组件更新时执行。</p>
+</li>
+<li class="lvl-3">
+<p><strong>监听特定状态的变化</strong>：有时我们只关心特定状态的变化，并希望在状态发生变化时执行相应的操作。通过将状态值作为 useUpdateEffect 的依赖项，可以确保副作用操作只在这些状态发生变化时触发。</p>
+</li>
+<li class="lvl-3">
+<p><strong>更新外部资源或库</strong>：有些第三方库或外部资源可能需要在组件更新时进行更新或重新初始化。使用 useUpdateEffect 可以确保在组件更新时调用相应的函数或方法，以便正确地更新这些外部资源。</p>
+</li>
+</ol>
+<p>以下是一个示例：</p>
+<pre><code class="language-tsx">import &#123; useEffect, useState &#125; from 'react';
+
+function MyComponent() &#123;
+  const [count, setCount] = useState(0);
+
+  useEffect(() =&gt; &#123;
+    console.log('useEffect - Component has rendered');
+  &#125;);
+
+  useUpdateEffect(() =&gt; &#123;
+    console.log('useUpdateEffect - Component has updated');
+  &#125;);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: &#123;count&#125;&lt;/p&gt;
+      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+&#125;
+</code></pre>
+<p>在上述示例中，当点击 “Increment” 按钮时，<code>count</code> 的值会增加并触发组件的重新渲染。<code>useEffect</code> 会在每次渲染后执行，而 <code>useUpdateEffec</code>t 只会在组件更新时执行。</p>
+<p>通过使用 <code>useUpdateEffect</code>，你可以在组件更新时执行一些特定的副作用操作，如请求数据、更新状态等，而不需要关心初始渲染阶段的操作。</p>
+<p><strong>自定义useUpdateEffect</strong></p>
+<p>要自定义一个类似于 <code>useUpdateEffect</code> 的自定义 Hook，你可以借助 React 的 <code>useEffect</code> 和 <code>useRef</code> Hooks 来实现。以下是一个示例代码：</p>
+<pre><code class="language-tsx">import &#123; useEffect, useRef &#125; from 'react';
+
+function useUpdateEffect(effect, dependencies) &#123;
+  const isMounted = useRef(false);
+
+  useEffect(() =&gt; &#123;
+    if (isMounted.current) &#123;
+      effect();
+    &#125; else &#123;
+      isMounted.current = true;
+    &#125;
+  &#125;, dependencies);
+&#125;
+
+// 使用示例
+function MyComponent() &#123;
+  const [count, setCount] = useState(0);
+
+  useUpdateEffect(() =&gt; &#123;
+    console.log('Component has updated');
+  &#125;, [count]);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: &#123;count&#125;&lt;/p&gt;
+      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+&#125;
+</code></pre>
+<p>在上述示例中，我们创建了一个名为 <code>useUpdateEffect</code> 的自定义 Hook。它接受两个参数：<code>effect</code> 和 <code>dependencies</code>。在内部，我们使用了 <code>useRef</code> 来创建一个标记是否已经完成初始渲染的变量 <code>isMounted</code>。</p>
+<p>在 useEffect 中，我们检查 isMounted 的值。如果 isMounted 的值为 true，则表示组件已经完成了初始渲染，此时执行传入的 effect 函数。否则，将 isMounted 的值设置为 true，表示组件已完成初始渲染。</p>
+<p>在使用时，你可以像使用 useEffect 一样，传入 effect 函数和依赖项数组 dependencies，并且 effect 函数只会在组件更新时执行。</p>
+<h5 id="2、useTitle">2、useTitle</h5>
+<p>useTitle 是一个相对经典的自定义 React Hook ,用来控制浏览器标题:</p>
+<p><strong>定义useTitle</strong></p>
+<pre><code class="language-tsx">import &#123; useState, useEffect &#125; from 'react';
+
+function useTitle(initialTitle) &#123;
+  const [title, setTitle] = useState(initialTitle);
+ 
+  useEffect(() =&gt; &#123;
+    document.title = title;
+  &#125;, [title]);
+
+  return setTitle;
+&#125;
+</code></pre>
+<p><strong>使用useTitle:</strong></p>
+<pre><code class="language-tsx">function Page() &#123;
+  const setTitle = useTitle('Default Title');
+ 
+  return (
+    &lt;Button onClick=&#123;() =&gt; setTitle('New Title')&#125;&gt;
+      Click me
+    &lt;/Button&gt;
+  )
+&#125;
+</code></pre>
+<p>点击按钮后,浏览器标题会变成&quot;New Title&quot;。它的工作原理是:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>保存标题的 state ,并记录修改 setTitle()</p>
+</li>
+<li class="lvl-2">
+<p>用 useEffect 监测 title 变化,设置 document.title</p>
+<p>所以一旦我们调用 setTitle(‘New Title’) 改变 state ,useEffect 就会执行,设置新的浏览器标题。</p>
+</li>
+</ul>
+<p>useTitle 的优点是:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>抽象出设置标题的逻辑,任何组件都可以共享</p>
+</li>
+<li class="lvl-2">
+<p>让组件更纯粹,只需要调用 setTitle() 接口即可</p>
+</li>
+</ul>
+<p>我们甚至可以抽象为更通用的 Hook:</p>
+<pre><code class="language-tsx">function useDocumentTitle(title) &#123;
+  useEffect(() =&gt; &#123;
+    document.title = title;
+  &#125;, [title]);
+&#125;
+
+function Page() &#123;
+  useDocumentTitle('Default Title');
+  // ...
+&#125;
+</code></pre>
+<h5 id="3、useForceUpdate">3、useForceUpdate</h5>
+<p><strong>定义useForceUpdate</strong></p>
+<pre><code class="language-tsx">import &#123; useState &#125; from 'react';
+
+function useForceUpdate() &#123;
+  const [, setValue] = useState(0); 
+  
+  return () =&gt; &#123;
+    setValue(value =&gt; !value); 
+      //这里的value =&gt; !value是一个函数，它接收当前的state（在这个例子中是0或1）作为参数value，然后返回其布尔反转值。
+  &#125;;
+&#125;
+</code></pre>
+<p><strong>useForceUpdate的使用</strong></p>
+<pre><code class="language-tsx">const forceUpdate = useForceUpdate();
+
+// 模拟更新组件
+forceUpdate();
+</code></pre>
+<p>这个 Hook 返回了一个更新函数。在调用这个函数时,使用useState强制组件重新渲染。这是基于以下原理实现的:</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>useState()会触发组件重新渲染</p>
+</li>
+<li class="lvl-2">
+<p>state变化后,组件函数会重新执行</p>
+</li>
+</ul>
+<p>函数式组件只有 state 或 props 变化时才会更新。使用此 Hook 我们可以主动触发组件更新。比如在使用过时数据时:</p>
+<pre><code class="language-tsx">// 过时数据 
+const &#123; data &#125; = useSomeHook();
+
+// 更新组件
+const forceUpdate = useForceUpdate();
+setInterval(() =&gt; &#123;
+  forceUpdate();
+&#125;, 5000);
+</code></pre>
+<p>每5秒强制组件一次,保证拿到最新数据。</p>
+<h5 id="4、useDebounce">4、useDebounce</h5>
+<p><strong>定义</strong></p>
+<pre><code class="language-tsx">import &#123; useState, useEffect &#125; from 'react';
+
+const useDebounce = (value, delay) =&gt; &#123;
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() =&gt; &#123;
+    let handler = setTimeout(() =&gt; &#123;
+      setDebouncedValue(value);
+    &#125;, delay);
+
+    return () =&gt; &#123;
+      clearTimeout(handler);
+    &#125;;
+  &#125;, [value, delay]);
+
+  return debouncedValue;
+&#125;;
+
+export default useDebounce;
+</code></pre>
+<p><strong>使用</strong></p>
+<pre><code class="language-tsx">const inputValue = useDebounced(searchTerm, 500);
+</code></pre>
+<p>这里 每当<code>searchTerm</code>变化时,会设置一个 500ms 的定时器。只有500ms内没有再改变<code>searchTerm</code>,才会更新<code>debouncedValue</code>。</p>
+<p><strong>防抖</strong>（Debouncing）：确保函数在指定的时间间隔内最多只执行一次。如果在时间间隔内多次触发，只有最后一次触发会被执行。</p>
+<p>防抖是一种限制函数被频繁调用的模式，确保函数在指定的时间间隔 <code>delay</code> 后执行，如果在这段时间内再次触发，则重新开始计时。这在处理诸如输入框内容变化、窗口大小调整等频繁触发的事件时非常有用。</p>
+<p><strong>防抖原理</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>当<code>value</code>变化时，<code>useEffect</code>钩子会重新运行，并设置一个新的定时器。</p>
+</li>
+<li class="lvl-2">
+<p>如果在定时器触发之前<code>value</code>再次变化，之前的定时器会被清理，并且设置一个新的定时器。</p>
+</li>
+<li class="lvl-2">
+<p>只有当在<code>delay</code>指定的时间间隔内没有新的<code>value</code>变化时，定时器才会触发，执行<code>setDebouncedValue(value)</code>，更新<code>debouncedValue</code>。</p>
+</li>
+<li class="lvl-2">
+<p>这确保了<code>setDebouncedValue</code>只在最后一次<code>value</code>变化后的<code>delay</code>时间间隔结束后调用，实现了防抖效果。</p>
+</li>
+</ul>
+<h5 id="5、useThrottle">5、useThrottle</h5>
+<p><strong>定义</strong></p>
+<pre><code class="language-tsx">import &#123; useState, useEffect &#125; from 'react';
+
+const useThrottle = (value, limit) =&gt; &#123;
+  const [throttledValue, setThrottledValue] = useState(value);
+  const latestValue = useRef(value); // 使用 useRef 来保存最新的值
+
+  useEffect(() =&gt; &#123;
+    let handler = setTimeout(() =&gt; &#123;
+      if (latestValue.current !== undefined) &#123;
+        setThrottledValue(latestValue.current);
+      &#125;
+    &#125;, limit);
+
+    latestValue.current = value;
+
+    return () =&gt; &#123;
+      clearTimeout(handler);
+    &#125;;
+  &#125;, [value, limit]); // 依赖项包含 value 和 limit
+
+  return throttledValue;
+&#125;;
+</code></pre>
+<p>我们使用 <code>useRef</code> 来保存最新的 <code>value</code>，并在 <code>useEffect</code> 中更新它。这样，无论 <code>value</code> 变化多快，我们总是可以在定时器触发时获取到最新的值。</p>
+<p><strong>使用</strong></p>
+<pre><code class="language-tsx">const throttledValue = useThrottle(inputValue, 1000);
+</code></pre>
+<p>这里 每次<code>inputValue</code>变化时,会开始一个计时器。1s后才会更新<code>throttledValue</code>,实现了节流功能。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>节流</strong>（Throttling）：确保函数在指定的时间间隔内至少执行一次。无论触发多少次，函数都会在时间间隔内定期执行。</p>
+</li>
+</ul>
+<p><strong>主要区别</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>触发时机</strong>：防抖是最后一次触发后等待，节流是在每次触发后等待。</p>
+</li>
+<li class="lvl-2">
+<p><strong>适用场景</strong>：防抖适用于输入验证等操作，节流适用于滚动事件、窗口调整等频繁触发的操作。</p>
+</li>
+<li class="lvl-2">
+<p><strong>副作用执行</strong>：防抖可能在快速连续触发后完全不执行副作用，节流保证在每个间隔内至少执行一次。</p>
+</li>
+</ul>
+<h5 id="6、useInterval">6、useInterval</h5>
+<p><strong>定义</strong></p>
+<pre><code class="language-tsx">import &#123; useRef, useEffect &#125; from 'react';
+
+const useInterval = (callback, delay) =&gt; &#123;
+  const savedCallback = useRef();
+
+  useEffect(() =&gt; &#123;
+    savedCallback.current = callback;
+  &#125;, [callback]);
+
+  useEffect(() =&gt; &#123;
+    function tick() &#123;
+      savedCallback.current();
+    &#125;
+
+    if (delay !== null) &#123;
+      let id = setInterval(tick, delay);
+      return () =&gt; clearInterval(id);
+    &#125;
+  &#125;, [delay]);
+&#125;;
+
+export default useInterval;
+</code></pre>
+<p><strong>使用</strong></p>
+<pre><code class="language-tsx">useInterval(() =&gt; &#123;
+  // ...
+&#125;, 1000); 
+</code></pre>
+<p>这里每1000ms就会调用一次回调函数,实现了定时执行指定函数的功能。</p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>基本流程</p>
